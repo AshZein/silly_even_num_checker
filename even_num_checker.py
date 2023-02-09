@@ -25,7 +25,7 @@ def block_writer(block: int) -> str:
     num_end = 2000000 * block + 1
     num_start = num_end - 2000000 - 1
     even_nums = [x for x in range(num_start, num_end) if x % 2 == 0]
-    with open(path + f'{dir_typ}locky_bois{dir_typ}lock{block}.py', 'w') as f:
+    with open(path + f'{dir_typ}locks{dir_typ}lock{block}.py', 'w') as f:
         f.write(f'def even_block(num: int) -> bool:')
         f.write(''.join(f'\n    if num == {i}:\n        return True\n'
                         for i in even_nums))
@@ -75,12 +75,12 @@ class EvenNum:
                 self.blocks.append(directory)
 
         if block_need + 1 == 1 and str(block_need + 1) in self.blocks:
-            x = importlib.import_module(f'locky_bois.lock{1}')
+            x = importlib.import_module(f'locks.lock{1}')
             return x.even_block(self.num)
 
         elif str(block_need + 1) in self.blocks:
             for i in range(1, block_need + 2):
-                x = importlib.import_module(f'locky_bois.lock{block_need + 1}')
+                x = importlib.import_module(f'locks.lock{block_need + 1}')
                 if i != block_need + 1:
                     x.even_block(self.num)
                 else:
