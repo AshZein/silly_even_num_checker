@@ -26,7 +26,7 @@ def block_writer(block: int) -> str:
     num_start = num_end - 2000000 - 1
     even_nums = [x for x in range(num_start, num_end) if x % 2 == 0]
     with open(path + f'{dir_typ}locks{dir_typ}lock{block}.py', 'w') as f:
-        f.write(f'def even_block(num: int) -> bool:')
+        f.write('def even_block(num: int) -> bool:')
         f.write(''.join(f'\n    if num == {i}:\n        return True\n'
                         for i in even_nums))
         f.write('    return False\n')
@@ -125,10 +125,17 @@ if __name__ == '__main__':
         window.close()
 
         if ty in valids[5:]:
+            # Setting the loading screen layout
+            loading_layout = [[sg.Text("CHECKING...Do not close window.")], []]
+            loading_window = sg.Window('Da-Even Number Checker', loading_layout)
+
+            # checking if number is even.
             start = time.time()
             to_check = EvenNum(int(num))
             out = to_check.check_even()
             end = time.time() - start
+
+            #loading_window.close() #closing loading window
 
             if out:
                 layout2 = [[sg.Text(f'\t\t\t{int(num)} is an EVEN number.')],
