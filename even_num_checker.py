@@ -26,14 +26,23 @@ def block_writer(block: int) -> str:
     num_start = num_end - 2000000 - 1
     even_nums = [x for x in range(num_start, num_end) if x % 2 == 0]
     with open(path + f'{dir_typ}locks{dir_typ}lock{block}.py', 'w') as f:
-        f.write('def even_block(num: int) -> bool:')
-        f.write(''.join(f'\n    if num == {i}:\n        return True\n'
-                        for i in even_nums))
-        f.write('    return False\n')
+        f.write('def even_block(num: int) -> bool:\n')
+        f.write('    is_even = False\n')
+        # f.write(''.join(f'    if num == {i} and not is_even:\n        is_even = True\n'
+        #                 for i in even_nums))
+        for i in range(num_start, num_end):
+            if i % 2 == 0:
+                f.write(f'    if num == {i}:\n        '
+                        'return True\n')
+            else:
+                f.write(f'    if num == {i}:\n        return False\n')
+
+        # f.write(''.join(f'    if num == {i} and not is_even:\n        is_even = True\n'
+        #                 for i in range(num_start, num_end)))
+        # f.write('    return is_even\n')
     with open(path + f'{dir_typ}locks.txt', 'a') as made:
         made.write(f'{block}\n')
     return f'{block}'
-
 
 class EvenNum:
     """
