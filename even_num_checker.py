@@ -28,8 +28,7 @@ def block_writer(block: int) -> str:
     with open(path + f'{dir_typ}locks{dir_typ}lock{block}.py', 'w') as f:
         f.write('def even_block(num: int) -> bool:\n')
         f.write('    is_even = False\n')
-        # f.write(''.join(f'    if num == {i} and not is_even:\n        is_even = True\n'
-        #                 for i in even_nums))
+
         for i in range(num_start, num_end):
             if i % 2 == 0:
                 f.write(f'    if num == {i}:\n        '
@@ -37,9 +36,6 @@ def block_writer(block: int) -> str:
             else:
                 f.write(f'    if num == {i}:\n        return False\n')
 
-        # f.write(''.join(f'    if num == {i} and not is_even:\n        is_even = True\n'
-        #                 for i in range(num_start, num_end)))
-        # f.write('    return is_even\n')
     with open(path + f'{dir_typ}locks.txt', 'a') as made:
         made.write(f'{block}\n')
     return f'{block}'
